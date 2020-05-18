@@ -1,0 +1,11 @@
+.loader {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.loader img {
+  max-height: 70%;
+}
