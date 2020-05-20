@@ -12,7 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Collapse from "@material-ui/core/Collapse";
 import DropDownWrapper from "./DropDownWrapper";
-
+import MainHeader from "./MainHeader";
 import routes from "../../routes";
 
 const drawerWidth = 300;
@@ -20,6 +20,7 @@ const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    // flexDirection: "column",
   },
   appBar: {
     width: `calc(100% - ${theme.spacing(7) + 1}px)`,
@@ -31,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "transparent",
+    backgroundColor: "#fff",
     boxShadow: "none",
     padding: "10px 24px",
+    top: "50px",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -131,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
-  paper: { backgroundColor: "#db3d44" },
+  paper: { backgroundColor: "#db3d44", marginTop: "50px" },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -160,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: "64px",
+    marginTop: "112px",
   },
   fullContent: { padding: 0 },
   buttonToggle: {
@@ -444,49 +446,57 @@ export default function MiniDrawer() {
   };
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <ul className={classes.buttonGroup}>{getHorizontalNavItems(routes)}</ul>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx(classes.paper, {
+    <>
+      <MainHeader />
+      <div className={classes.root}>
+        <CssBaseline />
+
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <ul className={classes.buttonGroup}>
+            {getHorizontalNavItems(routes)}
+          </ul>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <button
-            className={clsx(classes.buttonToggle, {
-              [classes.buttonToggleExpand]: open,
-            })}
-            onClick={() => setOpen(!open)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
+          })}
+          classes={{
+            paper: clsx(classes.paper, {
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <button
+              className={clsx(classes.buttonToggle, {
+                [classes.buttonToggleExpand]: open,
+              })}
+              onClick={() => setOpen(!open)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
 
-        <List className={classes.menuList}>{getNavItems(routes)}</List>
-      </Drawer>
-      <main
-        className={clsx(classes.content, { [classes.fullContent]: getRoute() })}
-      >
-        <Switch>{getRoutes(routes)}</Switch>
-      </main>
-    </div>
+          <List className={classes.menuList}>{getNavItems(routes)}</List>
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.fullContent]: getRoute(),
+          })}
+        >
+          <Switch>{getRoutes(routes)}</Switch>
+        </main>
+      </div>
+    </>
   );
 }

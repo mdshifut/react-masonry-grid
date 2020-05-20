@@ -2,8 +2,16 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import AutoResponsive from "autoresponsive-react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import useImageSearch from "./useImageSearch";
 import Loader from "../../components/Loader/Loader";
+
+const useStyle = makeStyles({
+  albumWrapper: {
+    overflowX: "hidden",
+    maxWidth: "100%",
+  },
+});
 
 const Home = () => {
   const [containerWidth, setContainerWidth] = useState(null);
@@ -44,14 +52,18 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (container.current) {
+      setContainerWidth(ReactDOM.findDOMNode(container.current).clientWidth);
+    }
     window.addEventListener("resize", getWindowSize, false);
     return () => {
       window.removeEventListener("resize", getWindowSize, false);
     };
   }, []);
 
+  const classes = useStyle();
   return (
-    <div className="albumPanel">
+    <div className={classes.albumWrapper}>
       <AutoResponsive ref={container} {...getAutoResponsiveProps()}>
         {images.map((i, index) => {
           let style = {
