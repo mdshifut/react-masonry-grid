@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
-  paper: { backgroundColor: "#db3d44", marginTop: "50px" },
+  paper: { backgroundColor: "#db3d44", marginTop: "67.09px" },
   drawerOpen: {
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: "112px",
+    marginTop: "67.09px",
   },
   fullContent: { padding: 0 },
   buttonToggle: {
@@ -451,7 +451,7 @@ export default function MiniDrawer() {
       <div className={classes.root}>
         <CssBaseline />
 
-        <AppBar
+        {/* <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
@@ -460,7 +460,7 @@ export default function MiniDrawer() {
           <ul className={classes.buttonGroup}>
             {getHorizontalNavItems(routes)}
           </ul>
-        </AppBar>
+        </AppBar> */}
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {
