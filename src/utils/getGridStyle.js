@@ -10,7 +10,6 @@ export const getGridStyle = ({
     type === "double"
       ? currentGridWidth * 2 - gutterSize
       : currentGridWidth - gutterSize;
-  console.log(currentGridWidth, width, type);
   return {
     width,
     height: gridSize === 12 ? width : width * 1.5,

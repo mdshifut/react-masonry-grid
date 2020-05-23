@@ -3,24 +3,19 @@ import { NavLink, Switch, Route } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Collapse from "@material-ui/core/Collapse";
-import DropDownWrapper from "./DropDownWrapper";
 import MainHeader from "./MainHeader";
 import routes from "../../routes";
-
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    // flexDirection: "column",
   },
   appBar: {
     width: `calc(100% - ${theme.spacing(7) + 1}px)`,
@@ -303,7 +298,6 @@ export default function MiniDrawer() {
 
   const [open, setOpen] = useState(false);
   const [activeDropDowns, setActiveDropDowns] = useState([]);
-  const [activeHorizontalDropDown, setActiveHorizontalDropDown] = useState("");
 
   const toggleDropDown = (name) => () => {
     if (activeDropDowns.includes(name)) {
@@ -313,14 +307,6 @@ export default function MiniDrawer() {
     }
 
     setActiveDropDowns([...activeDropDowns, name]);
-  };
-
-  const toggleHorizontalDropDown = (name) => () => {
-    if (activeHorizontalDropDown === name) {
-      return setActiveHorizontalDropDown("");
-    }
-
-    setActiveHorizontalDropDown(name);
   };
 
   const getNavItems = (routes, isSubMenu) => {
@@ -404,46 +390,6 @@ export default function MiniDrawer() {
       );
     });
   };
-  const getHorizontalNavItems = (routes) => {
-    return routes.map((route, index) => {
-      const { name, collapse, views, path, invisible, redirect } = route;
-
-      if (redirect || invisible) {
-        return null;
-      }
-
-      if (collapse) {
-        return (
-          <DropDownWrapper
-            outSideClickHandler={() => setActiveHorizontalDropDown("")}
-            key={index}
-            className={clsx(classes.horizontalDropDownButton, {
-              [classes.horizontalDropDownActive]: window.location.pathname.includes(
-                route.path
-              ),
-              [classes.horizontalDropDownWrapperOpen]:
-                activeHorizontalDropDown === name,
-            })}
-            onClick={toggleHorizontalDropDown(name)}
-          >
-            <a href="#some">
-              {name} <ArrowDropDownIcon />
-            </a>
-
-            <ul>{getHorizontalNavItems(views)}</ul>
-          </DropDownWrapper>
-        );
-      }
-
-      return (
-        <li key={index} onClick={(e) => e.stopPropagation()}>
-          <NavLink to={path} exact>
-            {name}
-          </NavLink>
-        </li>
-      );
-    });
-  };
 
   return (
     <>
@@ -451,16 +397,6 @@ export default function MiniDrawer() {
       <div className={classes.root}>
         <CssBaseline />
 
-        {/* <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <ul className={classes.buttonGroup}>
-            {getHorizontalNavItems(routes)}
-          </ul>
-        </AppBar> */}
         <Drawer
           variant="permanent"
           className={clsx(classes.drawer, {

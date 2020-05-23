@@ -71,7 +71,7 @@ const useStyle = makeStyles({
   },
 });
 
-const MainHeader = (props) => {
+const MainHeader = () => {
   const classes = useStyle();
   return (
     <Grid className={classes.mainHeaderWrapper} container spacing={2}>

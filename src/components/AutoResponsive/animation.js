@@ -70,6 +70,7 @@ class AnimationManager {
       }
 
       style[`${prefix}Transform`] = `translate3d(${x}px, ${y}px, 0)`;
+      return null;
     });
 
     this.mixAnimation(style);
@@ -83,6 +84,8 @@ class AnimationManager {
         style[
           `${prefix}TransitionTimingFunction`
         ] = this.transitionTimingFunction;
+
+        return null;
       });
     }
   }

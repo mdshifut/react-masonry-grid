@@ -15,6 +15,11 @@ const useStyle = makeStyles({
     justifyContent: "flex-end",
     padding: "10px 10px",
     alignItems: "center",
+    backgroundColor: "#fff",
+    position: "fixed",
+    width: "100%",
+    right: "0",
+    zIndex: "999",
   },
   buttons: {
     color: "#777",
