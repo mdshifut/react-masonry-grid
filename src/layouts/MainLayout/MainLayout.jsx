@@ -276,6 +276,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Generate react router routes
 const getRoutes = (routes) => {
   return routes.map((route, key) => {
     if (route.collapse) {
@@ -299,6 +300,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [activeDropDowns, setActiveDropDowns] = useState([]);
 
+  // DropDown menu toggler
   const toggleDropDown = (name) => () => {
     if (activeDropDowns.includes(name)) {
       return setActiveDropDowns(
@@ -309,6 +311,7 @@ export default function MiniDrawer() {
     setActiveDropDowns([...activeDropDowns, name]);
   };
 
+  // Generate Nav links
   const getNavItems = (routes, isSubMenu) => {
     return routes.map((route, index) => {
       const {
