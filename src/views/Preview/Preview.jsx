@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 const Preview = ({ match: { params } }) => {
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <img
-        src={`https://i.picsum.photos/id/${params.id}/1080/720.jpg`}
+        src={`https://picsum.photos/id/${params.id}/300/300`}
         alt=""
+        style={{ width: "100%" }}
       />
     </div>
   );

@@ -15,10 +15,26 @@ const useStyle = makeStyles({
     margin: "10px",
     marginTop: 0,
   },
+  imageWrapper: {
+    borderRadius: "5px",
+    overflow: "hidden",
+    position: "relative",
+    height: "100%",
+    width: "100%",
+  },
   image: {
     width: "100%",
     maxWidth: "100%",
     height: "100%",
+  },
+  caption: {
+    position: "absolute",
+    width: "100%",
+    padding: "10px 10px",
+    bottom: "0",
+    left: "0",
+    color: "#fff",
+    backgroundColor: "#00000080",
   },
 });
 
@@ -59,13 +75,17 @@ const Home = () => {
 
   const getWindowSize = () => {
     if (container.current) {
-      setContainerWidth(ReactDOM.findDOMNode(container.current).clientWidth);
+      setContainerWidth(
+        ReactDOM.findDOMNode(container.current).clientWidth - 10
+      );
     }
   };
 
   useEffect(() => {
     if (container.current) {
-      setContainerWidth(ReactDOM.findDOMNode(container.current).clientWidth);
+      setContainerWidth(
+        ReactDOM.findDOMNode(container.current).clientWidth - 10
+      );
     }
     window.addEventListener("resize", getWindowSize, false);
     return () => {
@@ -77,51 +97,58 @@ const Home = () => {
   return (
     <div className={classes.albumWrapper} ref={container}>
       <ImageGridControls gridSize={gridSize} setGridSize={setGridSize} />
-      {containerWidth && (
-        <AutoResponsive {...getAutoResponsiveProps()}>
-          {images.map((i, index) => {
-            // prev code
-            // let style =
-            //   i.width < 4000
-            //     ? getGridStyle({ gridSize, containerWidth })
-            //     : getGridStyle({ gridSize, containerWidth, type: "double" });
+      <div style={{ marginTop: "85px" }}>
+        {containerWidth && (
+          <AutoResponsive {...getAutoResponsiveProps()}>
+            {images.map((i, index) => {
+              // prev code
+              // let style =
+              //   i.width < 4000
+              //     ? getGridStyle({ gridSize, containerWidth })
+              //     : getGridStyle({ gridSize, containerWidth, type: "double" });
 
-            let style = getGridStyle({
-              gridSize,
-              containerWidth,
-              type: "double",
-            });
+              let style = getGridStyle({
+                gridSize,
+                containerWidth,
+                type: "double",
+              });
 
-            if (images.length === index + 1) {
+              if (images.length === index + 1) {
+                return (
+                  <Link
+                    key={index}
+                    to={`/preview/${i.id} `}
+                    style={style}
+                    ref={lastImageElementRef}
+                    className={classes.imageWrapper}
+                  >
+                    <div className={classes.imageWrapper}>
+                      <img
+                        className={classes.image}
+                        alt="img"
+                        src={`https://picsum.photos/id/${i.id}/300/300`}
+                      />
+                      <span className={classes.caption}>{i.author}</span>
+                    </div>
+                  </Link>
+                );
+              }
               return (
-                <Link
-                  key={index}
-                  to={`/preview/${i.id}`}
-                  style={style}
-                  ref={lastImageElementRef}
-                >
-                  <img
-                    className={classes.image}
-                    alt="img"
-                    // src={`https://i.picsum.photos/id/${i.id}/300/600.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
-                    src={`https://i.picsum.photos/id/531/200/300.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
-                  />
+                <Link key={index} to={`/preview/${i.id} `} style={style}>
+                  <div className={classes.imageWrapper}>
+                    <img
+                      className={classes.image}
+                      alt="img"
+                      src={`https://picsum.photos/id/${i.id}/300/300`}
+                    />
+                    <span className={classes.caption}>{i.author}</span>
+                  </div>
                 </Link>
               );
-            }
-            return (
-              <Link key={index} to={`/preview/${i.id}`} style={style}>
-                <img
-                  className={classes.image}
-                  alt="img"
-                  // src={`https://i.picsum.photos/id/${i.id}/300/600.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
-                  src={`${i.download_url}.jpg`}
-                />
-              </Link>
-            );
-          })}
-        </AutoResponsive>
-      )}
+            })}
+          </AutoResponsive>
+        )}
+      </div>
       <Loader loading={loading} />
     </div>
   );

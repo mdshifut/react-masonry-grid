@@ -75,10 +75,10 @@ const MainHeader = () => {
   const classes = useStyle();
   return (
     <Grid className={classes.mainHeaderWrapper} container spacing={2}>
-      <Grid lg={4} className={classes.headerLeft}>
+      <Grid item lg={4} className={classes.headerLeft}>
         <h1 className={classes.mainLogoText}>Site Logo</h1>
       </Grid>
-      <Grid lg={8} className={classes.headerRight}>
+      <Grid item lg={8} className={classes.headerRight}>
         <nav>
           <ul className={classes.navUl}>
             <li>

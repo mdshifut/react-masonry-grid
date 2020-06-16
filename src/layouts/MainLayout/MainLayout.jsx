@@ -331,6 +331,7 @@ export default function MiniDrawer() {
       if (collapse) {
         return (
           <div
+            key={index}
             className={clsx(classes.dropDownWrapper, {
               [classes.dropDownActive]: window.location.pathname.includes(
                 route.path
