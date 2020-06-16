@@ -80,12 +80,17 @@ const Home = () => {
       {containerWidth && (
         <AutoResponsive {...getAutoResponsiveProps()}>
           {images.map((i, index) => {
-            let style =
-              i.width < 4000
-                ? getGridStyle({ gridSize, containerWidth })
-                : getGridStyle({ gridSize, containerWidth, type: "double" });
+            // prev code
+            // let style =
+            //   i.width < 4000
+            //     ? getGridStyle({ gridSize, containerWidth })
+            //     : getGridStyle({ gridSize, containerWidth, type: "double" });
 
-            // console.log(style);
+            let style = getGridStyle({
+              gridSize,
+              containerWidth,
+              type: "double",
+            });
 
             if (images.length === index + 1) {
               return (
@@ -98,7 +103,8 @@ const Home = () => {
                   <img
                     className={classes.image}
                     alt="img"
-                    src={`https://i.picsum.photos/id/${i.id}/300/600.jpg`}
+                    // src={`https://i.picsum.photos/id/${i.id}/300/600.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
+                    src={`https://i.picsum.photos/id/531/200/300.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
                   />
                 </Link>
               );
@@ -108,7 +114,8 @@ const Home = () => {
                 <img
                   className={classes.image}
                   alt="img"
-                  src={`https://i.picsum.photos/id/${i.id}/300/600.jpg`}
+                  // src={`https://i.picsum.photos/id/${i.id}/300/600.jpg?hmac=zfPpbPSZ6_bXrCHp-HkvsObzLfkIb7pvmBoZhXrjKo4`}
+                  src={`${i.download_url}.jpg`}
                 />
               </Link>
             );

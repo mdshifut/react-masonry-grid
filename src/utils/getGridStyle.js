@@ -12,6 +12,7 @@ export const getGridStyle = ({
       : currentGridWidth - gutterSize;
   return {
     width,
-    height: gridSize === 12 ? width : width * 1.5,
+    // height: gridSize === 12 ? width : width * 1.5,
+    height: width,
   };
 };
