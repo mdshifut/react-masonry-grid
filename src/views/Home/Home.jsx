@@ -120,7 +120,6 @@ const Home = () => {
                     to={`/preview/${i.id} `}
                     style={style}
                     ref={lastImageElementRef}
-                    className={classes.imageWrapper}
                   >
                     <div className={classes.imageWrapper}>
                       <img
@@ -128,7 +127,7 @@ const Home = () => {
                         alt="img"
                         src={`https://picsum.photos/id/${i.id}/300/300`}
                       />
-                      <span className={classes.caption}>{i.author}</span>
+                      <span className={classes.caption}>{i.author} last</span>
                     </div>
                   </Link>
                 );
