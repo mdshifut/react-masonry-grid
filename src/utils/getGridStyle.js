@@ -13,6 +13,6 @@ export const getGridStyle = ({
   return {
     width,
     // height: gridSize === 12 ? width : width * 1.5,
-    height: width,
+    height: width * 0.6,
   };
 };
