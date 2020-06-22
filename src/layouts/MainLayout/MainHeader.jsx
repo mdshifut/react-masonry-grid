@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
+import LoginModal from "../../components/LoginModal/LoginModal";
 
 const useStyle = makeStyles({
   mainHeaderWrapper: {
@@ -72,54 +73,70 @@ const useStyle = makeStyles({
 });
 
 const MainHeader = () => {
+  const [loginModalOpen, setOpen] = React.useState(false);
+
+  const loginModalOpenHandler = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  const loginModalClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyle();
   return (
-    <Grid className={classes.mainHeaderWrapper} container spacing={2}>
-      <Grid item lg={4} className={classes.headerLeft}>
-        <h1 className={classes.mainLogoText}>Site Logo</h1>
+    <>
+      <LoginModal open={loginModalOpen} handleClose={loginModalClose} />
+      <Grid className={classes.mainHeaderWrapper} container spacing={2}>
+        <Grid item lg={4} className={classes.headerLeft}>
+          <h1 className={classes.mainLogoText}>Site Logo</h1>
+        </Grid>
+        <Grid item lg={8} className={classes.headerRight}>
+          <nav>
+            <ul className={classes.navUl}>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Device</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Reports</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Settings</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">
+                  <Icon>email</Icon>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/">
+                  <Icon>favorite</Icon>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/">
+                  <Icon>language</Icon>
+                </NavLink>
+              </li>
+              <li>
+                <a href="#login" onClick={loginModalOpenHandler}>
+                  Login
+                </a>
+              </li>
+              <li>
+                <a href="/" className="buttonMenu">
+                  Join free
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </Grid>
       </Grid>
-      <Grid item lg={8} className={classes.headerRight}>
-        <nav>
-          <ul className={classes.navUl}>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">Device</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">Reports</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">Settings</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">
-                <Icon>email</Icon>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/">
-                <Icon>favorite</Icon>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/">
-                <Icon>language</Icon>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/">Login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/" className="buttonMenu">
-                Join free
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
