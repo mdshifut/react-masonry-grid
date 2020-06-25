@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import clsx from "clsx";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   filterButtonWrapper: {
     position: "relative",
   },
@@ -14,7 +14,7 @@ const useStyle = makeStyles({
     display: "flex",
     alignItems: "center",
     border: "none",
-    color: "#777",
+    color: theme.palette.text.secondary,
     fontSize: "18px",
     cursor: "pointer",
     "&:focus": {
@@ -46,6 +46,7 @@ const useStyle = makeStyles({
     padding: "10px 15px",
     cursor: "pointer",
     transition: "0.3s",
+    color: theme.palette.text.secondary,
     "&:hover": {
       backgroundColor: "#ddd",
     },
@@ -53,7 +54,7 @@ const useStyle = makeStyles({
   selected: {
     backgroundColor: "#ddd",
   },
-});
+}));
 
 const FilterButton = (props) => {
   const filterButtonWrapperRef = useRef();
